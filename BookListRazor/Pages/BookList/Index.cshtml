@@ -13,3 +13,44 @@
         <a asp-page="Create" class="btn btn-primary">Create New Book</a>
     </div>
 </div>
+
+
+@if (Model.Books.Count() > 0)
+{
+    <table class="table table-striped border">
+        <tr class="table-secondary">
+            <th>
+                @Html.DisplayNameFor(m => m.Books.First().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Books.First().Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Books.First().ISBN)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var book in Model.Books)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(b => book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(b => book.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(b => book.ISBN)
+                </td>
+                <td class="text-right">
+                    <a asp-route-id="@book.Id" asp-page="Edit" class="btn btn-success btn-sm">Edit</a>
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No Books available.</p>
+}

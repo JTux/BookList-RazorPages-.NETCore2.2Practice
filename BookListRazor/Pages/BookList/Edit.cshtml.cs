@@ -19,6 +19,9 @@ namespace BookListRazor.Pages.BookList
         [BindProperty]
         public Book Book { get; set; }
 
+        [TempData]
+        public string Message { get; set; }
+
         public async Task OnGet(int id)
         {
             Book = await _context.Books.FindAsync(id);
@@ -36,6 +39,8 @@ namespace BookListRazor.Pages.BookList
             bookFromDb.ISBN = Book.ISBN;
 
             await _context.SaveChangesAsync();
+
+            Message = "Book updated successfully.";
 
             return RedirectToPage("Index");
         }
